@@ -51,7 +51,8 @@ const userSchema = new Schema({
 		maxlength: 99
 	},
 	phoneNumbers: [phoneNumberSchema],
-	addresses: [addressSchema]
+	addresses: [addressSchema],
+	orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }]
 
 }, {timestamps: true})
 
