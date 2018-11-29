@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
+import Login from '../Login/Login';
+import Signup from '../Signup/Signup';
 
 class App extends Component {
 	constructor(props) {
@@ -91,6 +93,8 @@ class App extends Component {
 		return (
 			<Router>
 				<div className="App">
+					<Route exact path="/login" render={() => <Login liftToken={this.liftTokenToState}/>}/>
+					<Route exact path="/signup" render={() => <Signup liftToken={this.liftTokenToState}/>}/>
 					<NavBar />
 					<Footer />
 				</div>
