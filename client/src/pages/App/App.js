@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import Login from './Login';
-import Signup from './Signup';
-import { UserProfile } from './UserProfile';
+import Login from '../Login/Login';
+import Signup from '../Signup/Signup';
+import { UserProfile } from '../Profile/UserProfile';
 
 class App extends Component {
 	constructor(props) {

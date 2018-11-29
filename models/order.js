@@ -8,7 +8,7 @@ const lineItemSchema = new Schema({
 
 const orderSchema = new Schema({
 	total: Number,
-	products: [lineItemSchema]
+	lineItems: [lineItemSchema]
 })
 
 module.exports = mongoose.model('Order', orderSchema);
