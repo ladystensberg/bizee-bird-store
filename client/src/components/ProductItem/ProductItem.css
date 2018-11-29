@@ -1,0 +1,5 @@
+.ProductItem {
+	width: 200px;
+	height: 250px;
+	box-shadow: -1px 1px 10px 4px rgba(128,128,128,1);
+}

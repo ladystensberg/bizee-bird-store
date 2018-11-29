@@ -10,6 +10,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
+import Store from '../Store/Store';
 
 class App extends Component {
 	constructor(props) {
@@ -95,6 +96,7 @@ class App extends Component {
 				<div className="App">
 					<Route exact path="/login" render={() => <Login liftToken={this.liftTokenToState}/>}/>
 					<Route exact path="/signup" render={() => <Signup liftToken={this.liftTokenToState}/>}/>
+					<Route exact path="/store" render={() => <Store/>}/>
 					<NavBar />
 					<Footer />
 				</div>
