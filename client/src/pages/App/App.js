@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import Login from '../Login/Login';
-import Signup from '../Signup/Signup';
-import { UserProfile } from '../Profile/UserProfile';
+import {
+	BrowserRouter as Router,
+	Route,
+	Link
+} from 'react-router-dom';
+import NavBar from '../../components/NavBar/NavBar';
+import Footer from '../../components/Footer/Footer';
 
 class App extends Component {
 	constructor(props) {
@@ -84,34 +88,19 @@ class App extends Component {
 	}
 
 	render() {
-		let user = this.state.user
-		if (user) {
-			return (
+		return (
+			<Router>
 				<div className="App">
-					<header>
-						<h1>Welcome to my Site!</h1>
-					</header>
-					<div className="content-box">
-						<UserProfile user={user} logout={this.logout} />
-						<p><a onClick={this.handleClick}>Test the protected route. Results below...</a></p>
-						<p>{this.state.lockedResult}</p>
-					</div>
+					<NavBar />
+					<Footer />
 				</div>
-			);
-		} else {
-			return (
-				<div className="App">
-					<header>
-						<h1>Welcome to my Site!</h1>
-					</header>
-					<div className="content-box">
-						<Signup liftToken={this.liftTokenToState} />
-						<Login liftToken={this.liftTokenToState} />
-					</div>
-				</div>
-			)
-		}
+			</Router>
+		)
 	}
 }
 
 export default App;
+
+/* <Signup liftToken={this.liftTokenToState} />
+<Login liftToken={this.liftTokenToState} />
+prop: logout={this.logout} */

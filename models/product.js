@@ -12,12 +12,17 @@ const produtSchema = new Schema({
 	},
 	category: {
 		type: String,
-		enum: [productCategories],
+		enum: productCategories,
 		required: true
 	},
+	brand: String,
 	description: String,
 	price: {
 		type: Number,
+		required: true
+	},
+	unitPrice: {
+		type: String,
 		required: true
 	},
 	sku: Number,

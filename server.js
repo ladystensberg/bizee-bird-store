@@ -18,6 +18,7 @@ app.use(require('method-override')('_method'));
 // define routes below
 // example: app.use('/api/fish', require('./routes/api'));
 
+app.use('/api/products', require('./routes/api/products'));
 app.use('/auth', auth);
 
 // catch all route for react must come AFTER all other routes

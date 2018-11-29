@@ -1,0 +1,50 @@
+.NavBar {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	height: 100px;
+	background-color: #7e57c2;
+	box-shadow: 0 0 20px grey;
+	display: grid;
+	grid-template-columns: '25% 25% 25%';
+	grid-template-rows: '100%';
+	grid-template-areas: 'logo name links';
+}
+
+.NavBar ul li {
+	list-style: none;
+}
+
+ul {
+	grid-area: links;
+}
+
+a {
+	color: white;
+}
+
+#logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -25px;
+	margin-left: -25px;
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+}
+
+#logoContainer {
+	margin-top: 10px;
+	margin-left: 20px;
+	height: 75px;
+	width: 75px;
+	border-radius: 50%;
+	background: white;
+	position: relative;
+	grid-area: logo;
+}
+
+#name {
+	grid-area: name;
+}
