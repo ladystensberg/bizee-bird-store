@@ -20,6 +20,7 @@ app.use(require('method-override')('_method'));
 
 app.use('/api/products', require('./routes/api/products'));
 app.use('/auth', auth);
+app.use('/api/payments', require('./routes/api/payments'));
 
 // catch all route for react must come AFTER all other routes
 app.get('*', (req, res, next) => {

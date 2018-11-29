@@ -15,7 +15,7 @@ stripe.tokens.create({
 		"cvc": '123'
 	}
 }, function (err, token) {
-	axios.post('/api/payments', token)
+	axios.post('http://localhost:3001/api/payments', {token})
 		.then(response => console.log(response))
 		.catch(err => console.log(err));
 });
