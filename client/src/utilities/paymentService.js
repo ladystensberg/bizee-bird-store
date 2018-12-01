@@ -1,21 +1,21 @@
-// create card token
-// this is sent to back end
-// back end creates the charge and sends to stripe for processing
+import axios from 'axios';
+const stripe = window.Stripe('pk_test_t2AOo3hDvdSwLzFABM1PuVpP');
 
-require('dotenv').config()
+function createPaymentToken() {
+	return stripe.createToken('card', {
+		number: '4242424242424242',
+		exp_month: 12,
+		exp_year: 2019,
+		cvc: 123
+	}).then(function(token) {
+		console.log(token);
+		axios.post('http://localhost:3001/api/payments', {token})
+			.then(response => console.log(response))
+			.catch(err => console.log(err));
+	});
+}
 
-var axios = require('axios');
-var stripe = require('stripe')(process.env.REACT_APP_STRIPE_PK_TEST);
 
-stripe.tokens.create({
-	card: {
-		"number": '4242424242424242',
-		"exp_month": 12,
-		"exp_year": 2019,
-		"cvc": '123'
-	}
-}, function (err, token) {
-	axios.post('http://localhost:3001/api/payments', {token})
-		.then(response => console.log(response))
-		.catch(err => console.log(err));
-});
+export default { 
+	createPaymentToken 
+};

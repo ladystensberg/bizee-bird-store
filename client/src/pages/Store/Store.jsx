@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ProductList from '../../components/ProductList/ProductList';	
+import ShoppingCart from '../../components/ShoppingCart/ShoppingCart';
 
 class Store extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			search: '',
-			products: null
+			products: null,
+			cartItems: [],
+			cartTotal: 0
 		}
+		this.handleAddToCart = this.handleAddToCart.bind(this);
 	}
 
 	componentDidMount() {
@@ -20,10 +24,23 @@ class Store extends Component {
 		})
 	}
 
+	handleAddToCart(e) {
+		var cartItems = this.state.cartItems;
+		var cartTotal = this.state.cartTotal;
+		cartItems.push(e);
+		this.setState({
+			cartTotal: cartTotal + e.price,
+			cartItems: cartItems
+		}, () => console.log(this.state.cartTotal + " / " + this.state.cartItems))
+	}	
+
 	render() {
 		if (this.state.products) {
 			return(
-				<ProductList products={this.state.products}/>
+				<div className="MiddleContent">
+					<ShoppingCart cartItems={this.state.cartItems} cartTotal={this.state.cartTotal}/>
+					<ProductList handleAddToCart={this.handleAddToCart} products={this.state.products}/>
+				</div>
 			)
 		} else {
 			return (
