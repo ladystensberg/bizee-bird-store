@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ProductList from '../../components/ProductList/ProductList';	
 import ShoppingCart from '../../components/ShoppingCart/ShoppingCart';
+import './Store.css';
 
 class Store extends Component {
 	constructor(props) {
@@ -37,7 +38,7 @@ class Store extends Component {
 	render() {
 		if (this.state.products) {
 			return(
-				<div className="MiddleContent">
+				<div className="MiddleContent Store">
 					<ShoppingCart cartItems={this.state.cartItems} cartTotal={this.state.cartTotal}/>
 					<ProductList handleAddToCart={this.handleAddToCart} products={this.state.products}/>
 				</div>

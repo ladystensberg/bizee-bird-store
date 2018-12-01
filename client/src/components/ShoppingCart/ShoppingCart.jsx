@@ -1,10 +1,11 @@
 import React from 'react';
+import './ShoppingCart.css';
 
 const ShoppingCart = (props) => (
-	<div className="ShoppingCart">
-		<h1>This is the shopping cart</h1>
+	<div className="ShoppingCart MiddleContent">
+		<h1>Your Cart</h1>
 		{props.cartItems.map((product) => <p key={product._id}>{product.name}</p>)}
-		{props.cartTotal}
+		<h4>Total: {Math.round(props.cartTotal * 100) / 100}</h4>
 	</div>
 )
 export default ShoppingCart;

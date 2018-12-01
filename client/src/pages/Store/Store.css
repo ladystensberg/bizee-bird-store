@@ -1,8 +1,8 @@
-.ProductList {
+.Store {
 	padding: 20px;
 	display: grid;
-	grid-template-columns: repeat(5, auto);
+	grid-template-columns: 25% 75%;
 	grid-auto-rows: minmax(1fr, auto);
 	grid-row-gap: 20px;
-	grid-area: products;
+	grid-template-areas: 'shoppingCart products'
 }
