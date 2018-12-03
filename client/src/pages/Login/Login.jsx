@@ -51,7 +51,7 @@ class Login extends Component {
 	render() {
 		let errorPanel = (this.state.error) ? <ErrorPanel error={this.state.error} /> : ''
 		return (
-			<div className="Login">
+			<div className="MiddleContent">
 				<h3>Log in:</h3>
 				{errorPanel}
 				<form onSubmit={this.handleSubmit}>

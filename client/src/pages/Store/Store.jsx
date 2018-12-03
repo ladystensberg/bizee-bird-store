@@ -26,13 +26,22 @@ class Store extends Component {
 	}
 
 	handleAddToCart(e) {
-		var cartItems = this.state.cartItems;
-		var cartTotal = this.state.cartTotal;
-		cartItems.push(e);
+		var cartItemsCopy = Object.assign([], this.state.cartItems);
+		var cartTotalCopy = Object.assign(this.state.cartTotal);
+		var qtyOptions = document.getElementById(e._id);
+		var qtyValue = parseInt(qtyOptions.options[qtyOptions.selectedIndex].value);
+		let item = e;
+		item.qty = qtyValue;
+		var foundItem = cartItemsCopy.findIndex(element => element.name === item.name);
+		if (foundItem < 0) {
+			cartItemsCopy.push(item);
+		} else {
+			cartItemsCopy[foundItem].qty += item.qty;
+		}
 		this.setState({
-			cartTotal: cartTotal + e.price,
-			cartItems: cartItems
-		}, () => console.log(this.state.cartTotal + " / " + this.state.cartItems))
+			cartTotal: cartTotalCopy + e.price,
+			cartItems: cartItemsCopy
+		})
 	}	
 
 	render() {

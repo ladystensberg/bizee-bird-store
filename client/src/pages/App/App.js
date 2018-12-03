@@ -11,6 +11,7 @@ import Footer from '../../components/Footer/Footer';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import Store from '../Store/Store';
+import UserProfile from '../UserProfile/UserProfile';
 
 class App extends Component {
 	constructor(props) {
@@ -96,8 +97,9 @@ class App extends Component {
 				<div className="App">
 					<Route exact path="/login" render={() => <Login liftToken={this.liftTokenToState}/>}/>
 					<Route exact path="/signup" render={() => <Signup liftToken={this.liftTokenToState}/>}/>
-					<Route exact path="/store" render={() => <Store/>}/>
-					<NavBar />
+					<Route exact path="/store" render={() => <Store user={this.state.user}/>}/>
+					<Route exact path="/profile" render={() => <UserProfile user={this.state.user} liftToken={this.liftTokenToState}/>}/>
+					<NavBar logout={this.logout} user={this.state.user}/>
 					<Footer />
 				</div>
 			</Router>
@@ -106,7 +108,3 @@ class App extends Component {
 }
 
 export default App;
-
-/* <Signup liftToken={this.liftTokenToState} />
-<Login liftToken={this.liftTokenToState} />
-prop: logout={this.logout} */

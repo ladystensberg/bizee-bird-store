@@ -131,7 +131,7 @@ class Signup extends Component {
 	render() {
 		let errorPanel = (this.state.error) ? <ErrorPanel error={this.state.error} /> : ''
 		return (
-			<div className="Signup">
+			<div className="MiddleContent">
 				<h3>Create a new account:</h3>
 				{errorPanel}
 				<form onSubmit={this.handleSubmit}>
