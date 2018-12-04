@@ -1,12 +1,16 @@
 import React from 'react';
+import Moment from 'react-moment';
 
-const OrderItem = ({order, handleOrderCancel}) => (
-	<div className="OrderItem">
-		<h3>{order.lineItems.map(item => <div key={item._id}>{item._id}</div>)}</h3>
-		<h4>{order.total}</h4>
-		<button onClick={() => handleOrderCancel(order._id)}>Cancel Order</button>
-	</div>
-)
+const OrderItem = ({order, handleOrderCancel}) => {
+	return (
+		<tr>
+			<td>{order._id}</td>
+			<td><Moment format="MM/DD/YYYY">{order.createdAt}</Moment></td>
+			<td><strong>{order.total}</strong></td>
+			<td><button onClick={() => handleOrderCancel(order._id)}>Cancel Order</button></td>
+		</tr>
+	)
+}
 
 
 export default OrderItem;

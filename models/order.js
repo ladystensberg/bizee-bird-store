@@ -9,6 +9,8 @@ const lineItemSchema = new Schema({
 const orderSchema = new Schema({
 	total: Number,
 	lineItems: [lineItemSchema]
+}, {
+	timestamps: true
 })
 
 module.exports = mongoose.model('Order', orderSchema);

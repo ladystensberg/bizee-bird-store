@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './UserProfile.css';
-import OrderItem from '../../components/OrderItem/OrderItem';
+import OrderList from '../../components/OrderList/OrderList';
+import UserInfo from '../../components/UserInfo/UserInfo';
 
 class UserProfile extends Component {
 	constructor(props) {
@@ -17,7 +18,6 @@ class UserProfile extends Component {
 			user: this.props.user
 		})
 		.then(result => {
-			console.log(result.data.user)
 			this.setState({
 				orders: result.data.user.orders
 			})
@@ -45,9 +45,10 @@ class UserProfile extends Component {
 			)
 		} else {
 			return (
-				<div className="UserProfile MiddleContent">
-					<h1>{this.props.user.name}'s Orders: </h1>
-					{this.state.orders.map((order => <OrderItem key={order._id} handleOrderCancel={this.handleOrderCancel} order={order} />))}
+				<div className="UserProfile">
+					<h1 className='Header'>User Profile</h1>
+					<OrderList handleOrderCancel={this.handleOrderCancel} orders={this.state.orders}/>
+					<UserInfo user={this.props.user}/>
 				</div>
 			)
 		}
