@@ -43,7 +43,7 @@ class Store extends Component {
 	}
 
 	handleCheckout() {
-		axios.post('/api/checkout', {
+		axios.post('/api/orders/checkout', {
 			lineItems: this.state.cartItems,
 			orderTotal: this.state.cartTotal,
 			user: this.props.user

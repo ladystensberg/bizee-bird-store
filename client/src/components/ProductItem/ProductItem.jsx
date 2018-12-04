@@ -1,7 +1,5 @@
 import React from 'react';
 import './ProductItem.css';
-import { PromiseProvider } from 'mongoose';
-// import paymentService from '../../utilities/paymentService';
 
 const ProductItem = ({product, handleAddToCart}) => (
 	<div className="ProductItem">
