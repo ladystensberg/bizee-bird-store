@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ProductList from '../../components/ProductList/ProductList';	
+import ProductList from '../../components/ProductList/ProductList';
 import ShoppingCart from '../../components/ShoppingCart/ShoppingCart';
 import './Store.css';
 
@@ -8,48 +8,60 @@ class Store extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			search: '',
 			products: null,
 			cartItems: [],
 			cartTotal: 0
 		}
 		this.handleAddToCart = this.handleAddToCart.bind(this);
+		this.handleCheckout = this.handleCheckout.bind(this);
 	}
 
 	componentDidMount() {
 		axios.get('/api/products')
-		.then(result => {
-			this.setState({
-				products: result.data
+			.then(result => {
+				this.setState({
+					products: result.data
+				})
 			})
-		})
 	}
 
 	handleAddToCart(e) {
-		var cartItemsCopy = Object.assign([], this.state.cartItems);
-		var cartTotalCopy = Object.assign(this.state.cartTotal);
-		var qtyOptions = document.getElementById(e._id);
-		var qtyValue = parseInt(qtyOptions.options[qtyOptions.selectedIndex].value);
-		let item = e;
-		item.qty = qtyValue;
+		var cartItemsCopy = Array.from(this.state.cartItems)
+		var cartTotalCopy = this.state.cartTotal;
+		let item = Object.assign({}, e);
+		item.qty = 1;
 		var foundItem = cartItemsCopy.findIndex(element => element.name === item.name);
 		if (foundItem < 0) {
 			cartItemsCopy.push(item);
 		} else {
-			cartItemsCopy[foundItem].qty += item.qty;
+			cartItemsCopy[foundItem].qty += 1
 		}
 		this.setState({
 			cartTotal: cartTotalCopy + e.price,
 			cartItems: cartItemsCopy
 		})
-	}	
+	}
+
+	handleCheckout() {
+		axios.post('/api/checkout', {
+			lineItems: this.state.cartItems,
+			orderTotal: this.state.cartTotal,
+			user: this.props.user
+		})
+		.then(function (response) {
+			console.log(response);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+	}
 
 	render() {
 		if (this.state.products) {
-			return(
+			return (
 				<div className="MiddleContent Store">
-					<ShoppingCart cartItems={this.state.cartItems} cartTotal={this.state.cartTotal}/>
-					<ProductList handleAddToCart={this.handleAddToCart} products={this.state.products}/>
+					<ShoppingCart user={this.props.user} handleCheckout={this.handleCheckout} cartItems={this.state.cartItems} cartTotal={this.state.cartTotal} />
+					<ProductList handleAddToCart={this.handleAddToCart} products={this.state.products} />
 				</div>
 			)
 		} else {
@@ -59,7 +71,7 @@ class Store extends Component {
 				</div>
 			)
 		}
-		
+
 	}
 }
 

@@ -4,7 +4,9 @@ import axios from 'axios';
 import {
 	BrowserRouter as Router,
 	Route,
-	Link
+	Link,
+	Redirect,
+	Switch
 } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
@@ -25,23 +27,12 @@ class App extends Component {
 		this.checkForLocalToken = this.checkForLocalToken.bind(this)
 		this.logout = this.logout.bind(this)
 		this.liftTokenToState = this.liftTokenToState.bind(this)
-		this.handleClick = this.handleClick.bind(this)
 	}
 
 	liftTokenToState(data) {
 		this.setState({
 			token: data.token,
 			user: data.user
-		})
-	}
-
-	handleClick(e) {
-		e.preventDefault()
-		axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token
-		axios.get('/locked/test').then(result => {
-			this.setState({
-				lockedResult: result.data
-			})
 		})
 	}
 
@@ -94,14 +85,23 @@ class App extends Component {
 	render() {
 		return (
 			<Router>
-				<div className="App">
-					<Route exact path="/login" render={() => <Login liftToken={this.liftTokenToState}/>}/>
-					<Route exact path="/signup" render={() => <Signup liftToken={this.liftTokenToState}/>}/>
-					<Route exact path="/store" render={() => <Store user={this.state.user}/>}/>
-					<Route exact path="/profile" render={() => <UserProfile user={this.state.user} liftToken={this.liftTokenToState}/>}/>
-					<NavBar logout={this.logout} user={this.state.user}/>
-					<Footer />
-				</div>
+				<Switch>
+					<div className="App">
+						<Route exact path="/login" render={() => <Login liftToken={this.liftTokenToState}/>}/>
+						<Route exact path="/signup" render={() => <Signup liftToken={this.liftTokenToState}/>}/>
+						<Route exact path="/store" render={() => <Store user={this.state.user}/>}/>
+						<Route path='/profile' render={() => (
+                            this.state.user ?
+                                <UserProfile
+									user={this.state.user}
+									logout={this.logout}
+                                /> :
+                                <Redirect to='/login' />
+                        )} />
+						<NavBar logout={this.logout} user={this.state.user}/>
+						<Footer />
+					</div>
+				</Switch>
 			</Router>
 		)
 	}

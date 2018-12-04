@@ -34,14 +34,17 @@ router.post('/signup', (req, res) => {
 					});
 				} else {
 					// Log the user in (sign a new token)
-					var token = jwt.sign(user.toObject(), process.env.JWT_SECRET, {
+					let userNoPass = Object.assign({}, user.toObject());
+					delete userNoPass.password;
+					var token = jwt.sign(userNoPass, process.env.JWT_SECRET, {
 						expiresIn: 60 * 60 * 24
 					});
 					// Return user and token to React app
+					
 					res.json({
 						type: 'success',
 						status: 200,
-						user,
+						user: userNoPass,
 						token
 					});
 				}
@@ -57,13 +60,16 @@ router.post('/login', (req, res) => {
 			// If there is a user, check their entered password against the DB hash
 			if (user.authenticated(req.body.password)) {
 				// if it matches: log them in (sign a token)
-				var token = jwt.sign(user.toObject(), process.env.JWT_SECRET, {
+				let userNoPass = Object.assign({}, user.toObject());
+				delete userNoPass.password;
+				var token = jwt.sign(userNoPass, process.env.JWT_SECRET, {
 					expiresIn: 60 * 60 * 24
 				});
+				
 				res.json({
 					type: 'success',
 					status: 200,
-					user,
+					user: userNoPass,
 					token
 				});
 			} else {
@@ -117,10 +123,12 @@ router.post('/me/from/token', (req, res) => {
 						});
 					} else {
 						// send the user and the token back to the React app
+						let userNoPass = Object.assign({}, user.toObject());
+						delete userNoPass.password;
 						res.json({
 							type: 'success',
 							status: 200,
-							user,
+							user: userNoPass,
 							token
 						});
 					}

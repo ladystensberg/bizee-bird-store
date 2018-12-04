@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ErrorPanel from '../../components/ErrorPanel/ErrorPanel';
 import './Login.css';
+import {Redirect} from 'react-router-dom';
 
 class Login extends Component {
 	constructor(props) {
@@ -9,7 +10,8 @@ class Login extends Component {
 		this.state = {
 			email: '',
 			password: '',
-			error: null
+			error: null,
+			redirectToHome: false
 		}
 		this.handleEmailChange = this.handleEmailChange.bind(this)
 		this.handlePasswordChange = this.handlePasswordChange.bind(this)
@@ -42,13 +44,15 @@ class Login extends Component {
 				localStorage.setItem('mernToken', result.data.token)
 				this.props.liftToken(result.data)
 				this.setState({
-					error: null
+					error: null,
+					redirectToHome: true
 				})
 			}
 		})
 	}
 
 	render() {
+		if (this.state.redirectToHome) return <Redirect to="/profile" />
 		let errorPanel = (this.state.error) ? <ErrorPanel error={this.state.error} /> : ''
 		return (
 			<div className="MiddleContent">

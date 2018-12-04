@@ -1,7 +1,8 @@
 import React from 'react';
 import './NavBar.css'
 import {
-	BrowserRouter as Router
+	Link
+
 } from 'react-router-dom';
 import logo from '../../images/parrot.svg';
 
@@ -9,37 +10,34 @@ const NavBar = (props) => {
 
 	if (props.user) {
 		return (
-			<Router>
 				<nav className="NavBar">
 					<div id="logoContainer">
-						<a href='/'><img src={logo} alt='logo' id='logo'/></a>
+						<Link to='/'><img src={logo} alt='logo' id='logo'/></Link>
 					</div>
 					<div id="name">
 						<h2>BiZee Bird Store</h2>
 					</div>
 					<ul>
-						<li><a href='/profile'>Hi, {props.user.name}</a></li>
-						<li><a onClick={props.logout}>Logout</a></li>
+						<li><Link to='/profile'>Hi, {props.user.name}</Link>  ||  </li> 
+						<li><a onClick={props.logout}>Logout</a>  ||  </li>
+						<li><Link to='/store'>Store</Link></li>
 					</ul>
 				</nav>
-			</Router>
 		)
 	} else {
 		return (
-			<Router>
 				<nav className="NavBar">
 					<div id="logoContainer">
-						<a href='/'><img src={logo} alt='logo' id='logo'/></a>
+						<Link to='/'><img src={logo} alt='logo' id='logo'/></Link>
 					</div>
 					<div id="name">
 						<h2>BiZee Bird Store</h2>
 					</div>
 					<ul>
-						<li><a href='/login'>Login</a></li>
-						<li><a href='/signup'>Sign Up</a></li>
+						<li><Link to='/login'>Login</Link></li>
+						<li><Link to='/signup'>Sign Up</Link></li>
 					</ul>
 				</nav>
-			</Router>
 		)
 	}
 
