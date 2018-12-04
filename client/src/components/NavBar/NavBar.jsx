@@ -14,9 +14,6 @@ const NavBar = (props) => {
 					<div id="logoContainer">
 						<Link to='/'><img src={logo} alt='logo' id='logo'/></Link>
 					</div>
-					<div id="name">
-						<h2>BiZee Bird Store</h2>
-					</div>
 					<ul>
 						<li><Link to='/profile'>Hi, {props.user.name}</Link>  ||  </li> 
 						<li><a onClick={props.logout}>Logout</a>  ||  </li>

@@ -9,6 +9,7 @@ class UserProfile extends Component {
 		this.state = {
 			orders: null
 		}
+		this.handleOrderCancel = this.handleOrderCancel.bind(this);
 	}
 
 	componentDidMount() {
@@ -16,6 +17,7 @@ class UserProfile extends Component {
 			user: this.props.user
 		})
 		.then(result => {
+			console.log(result.data.user)
 			this.setState({
 				orders: result.data.user.orders
 			})
@@ -23,6 +25,17 @@ class UserProfile extends Component {
 		.catch(function (error) {
 			console.log(error);
 		});
+	}
+
+	handleOrderCancel(orderId) {
+		axios.post('/api/orders/cancel', {
+			order: orderId,
+			user: this.props.user
+		})
+		.then(result => {
+			console.log(result);
+			this.componentDidMount()
+		})
 	}
 
 	render() {
@@ -34,7 +47,7 @@ class UserProfile extends Component {
 			return (
 				<div className="UserProfile MiddleContent">
 					<h1>{this.props.user.name}'s Orders: </h1>
-					{this.state.orders.map((order => <OrderItem key={order._id} lineItems={order.lineItems} total={order.total} />))}
+					{this.state.orders.map((order => <OrderItem key={order._id} handleOrderCancel={this.handleOrderCancel} order={order} />))}
 				</div>
 			)
 		}

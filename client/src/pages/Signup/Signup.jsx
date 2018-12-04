@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 import ErrorPanel from '../../components/ErrorPanel/ErrorPanel';
 import './Signup.css';
@@ -14,7 +15,8 @@ class Signup extends Component {
 			passHasLow: false,
 			passHasDig: false,
 			passHasPunc: false,
-			error: null
+			error: null,
+			redirectToHome: false
 		}
 		this.handleNameChange = this.handleNameChange.bind(this)
 		this.handleEmailChange = this.handleEmailChange.bind(this)
@@ -118,7 +120,8 @@ class Signup extends Component {
 						passHasCap: false,
 						passHasLow: false,
 						passHasDig: false,
-						passHasPunc: false
+						passHasPunc: false,
+						redirectToHome: true
 					})
 				} else {
 					localStorage.setItem('mernToken', result.data.token)
@@ -129,6 +132,7 @@ class Signup extends Component {
 	}
 
 	render() {
+		if (this.state.redirectToHome) return <Redirect to="/profile" />
 		let errorPanel = (this.state.error) ? <ErrorPanel error={this.state.error} /> : ''
 		return (
 			<div className="MiddleContent">

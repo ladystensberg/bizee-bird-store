@@ -4,6 +4,6 @@ const orders = require('../../constrollers/ordersController');
 
 router.post('/', orders.getOrders);
 router.post('/checkout', orders.createOrder);
-router.get('/:id/cancel', orders.cancelOrder);
+router.post('/cancel', orders.cancelOrder);
 
 module.exports = router;

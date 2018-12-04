@@ -29,13 +29,17 @@ module.exports = {
 		});
 	},
 	cancelOrder: (req, res, next) => {
-		let order = req.params.id;
+		let order = req.body.order;
+		console.log(order);
+		let id = req.body.user._id;
 		User.findById(id, (err, user) => {
 			let orders = user.orders;
-			let orderToRemove = orders.id(order);
+			console.log(orders);
+			var orderToRemove = orders.findIndex(element => element == order);
+			console.log(orderToRemove);
 			orders.splice(orderToRemove, 1);
 			user.save(err => {
-				res.send(orders);
+				res.send(user);
 			})
 		})
 	}

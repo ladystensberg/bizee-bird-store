@@ -1,10 +1,10 @@
 import React from 'react';
 
-const OrderItem = ({lineItems, total}) => (
+const OrderItem = ({order, handleOrderCancel}) => (
 	<div className="OrderItem">
-		<h3>{lineItems.map(item => <p>{item._id}</p>)}</h3>
-		<h4>{total}</h4>
-		<button>Cancel Order</button>
+		<h3>{order.lineItems.map(item => <div key={item._id}>{item._id}</div>)}</h3>
+		<h4>{order.total}</h4>
+		<button onClick={() => handleOrderCancel(order._id)}>Cancel Order</button>
 	</div>
 )
 
