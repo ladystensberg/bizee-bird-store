@@ -28,7 +28,7 @@ BiZee Bird Store is an e-commerce site that sells birdseed. It was created for [
 
 # Getting Started
 [Trello Board](https://trello.com/b/HZoLwux7/bizee-bird-store) 
-[Deployed App](https://bizeebirdstore.heroku.com) 
+[Deployed App](https://bizeebirdstore.herokuapp.com/) 
 
 # Unsolved Problems
 The user password is being passed via the token on certain pages. This needs to be resolved as soon as possible to ensure the security of the user's private information.
