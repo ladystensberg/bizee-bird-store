@@ -14,6 +14,9 @@ class Store extends Component {
 			orderPlaced: false
 		}
 		this.handleAddToCart = this.handleAddToCart.bind(this);
+		this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
+		this.handleQtyPlus = this.handleQtyPlus.bind(this);
+		this.handleQtyMinus = this.handleQtyMinus.bind(this);
 		this.handleCheckout = this.handleCheckout.bind(this);
 		this.resetStateAfterOrder = this.resetStateAfterOrder.bind(this);
 	}
@@ -40,6 +43,49 @@ class Store extends Component {
 		}
 		this.setState({
 			cartTotal: cartTotalCopy + e.price,
+			cartItems: cartItemsCopy
+		})
+	}
+
+	handleRemoveFromCart(e) {
+		var cartItemsCopy = Array.from(this.state.cartItems);
+		var cartTotalCopy = this.state.cartTotal;
+		let item = Object.assign({}, e);
+		var foundItem = cartItemsCopy.findIndex(element => element.name === item.name);
+		console.log(foundItem);
+		if (foundItem >= 0) {
+			cartItemsCopy.splice(foundItem, 1);
+		}
+		this.setState({
+			cartTotal: cartTotalCopy - e.price,
+			cartItems: cartItemsCopy
+		})
+	}
+
+	handleQtyMinus(e) {
+		var cartItemsCopy = Array.from(this.state.cartItems);
+		var cartTotalCopy = this.state.cartTotal;
+		let item = Object.assign({}, e);
+		var foundItem = cartItemsCopy.findIndex(element => element.name === item.name);
+		if (foundItem !== 0) {
+			cartItemsCopy[foundItem].qty = cartItemsCopy[foundItem].qty - 1
+		}
+		this.setState({
+			cartTotal: cartTotalCopy - e.price,
+			cartItems: cartItemsCopy
+		})
+	}
+
+	handleQtyPlus(e) {
+		var cartItemsCopy = Array.from(this.state.cartItems);
+		var cartTotalCopy = this.state.cartTotal;
+		let item = Object.assign({}, e);
+		var foundItem = cartItemsCopy.findIndex(element => element.name === item.name);
+		if (foundItem !== 0) {
+			cartItemsCopy[foundItem].qty = cartItemsCopy[foundItem].qty + 1
+		}
+		this.setState({
+			cartTotal: cartTotalCopy - e.price,
 			cartItems: cartItemsCopy
 		})
 	}
@@ -71,7 +117,7 @@ class Store extends Component {
 		if (this.state.products) {
 			return (
 				<div className="MiddleContent Store">
-					<ShoppingCart orderPlaced={this.state.orderPlaced} user={this.props.user} handleCheckout={this.handleCheckout} cartItems={this.state.cartItems} cartTotal={this.state.cartTotal} />
+					<ShoppingCart  handleQtyMinus={this.handleQtyMinus} handleQtyPlus={this.handleQtyPlus} handleRemoveFromCart={this.handleRemoveFromCart} orderPlaced={this.state.orderPlaced} user={this.props.user} handleCheckout={this.handleCheckout} cartItems={this.state.cartItems} cartTotal={this.state.cartTotal} />
 					<ProductList handleAddToCart={this.handleAddToCart} products={this.state.products} />
 				</div>
 			)
