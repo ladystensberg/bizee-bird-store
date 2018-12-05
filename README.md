@@ -34,6 +34,7 @@ BiZee Bird Store is an e-commerce site that sells birdseed. It was created for [
 The user password is being passed via the token on certain pages. This needs to be resolved as soon as possible to ensure the security of the user's private information.
 
 # Future Enhancements
+* Persist shopping cart, even when not logged in. Once user logs in, load saved cart and allow user to checkout.
 * Additions of web pages, such as About, Welcome, Contact, etc.
 * User profile feature of requesting additional services such as boarding and grooming appointments.
 * User profile feature of adding additional phone numbers and addresses.
