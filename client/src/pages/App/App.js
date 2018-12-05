@@ -89,7 +89,7 @@ class App extends Component {
 					<div className="App">
 						<Route exact path="/login" render={() => <Login liftToken={this.liftTokenToState}/>}/>
 						<Route exact path="/signup" render={() => <Signup liftToken={this.liftTokenToState}/>}/>
-						<Route exact path="/store" render={() => <Store user={this.state.user}/>}/>
+						<Route exact path="/" render={() => <Store user={this.state.user}/>}/>
 						<Route path='/profile' render={() => (
                             this.state.user ?
                                 <UserProfile

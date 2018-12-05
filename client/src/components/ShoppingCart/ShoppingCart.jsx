@@ -12,18 +12,22 @@ const ShoppingCart = (props) => {
 			<div className="ShoppingCart MiddleContent">
 				<h1>Your Cart</h1>
 				<table id="cart-items" align="center">
-					<tr>
-						<th>Item</th>
-						<th>Quantity</th>
-						<th>Subtotal</th>
-						<th></th>
-					</tr>
+					<thead>
+						<tr>
+							<th>Item</th>
+							<th>Quantity</th>
+							<th>Subtotal</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
 					{props.cartItems.map((product) => <tr key={product._id}>
-					<td>{product.name}</td>
-					<td><img src={minus} alt='minus' onClick={(e) => props.handleQtyMinus(product)}/>{product.qty}<img src={plus} alt='plus' onClick={(e) => props.handleQtyPlus(product)}/></td>
-					<td>{Math.round((product.price * product.qty) * 100) / 100}</td>
-					<td><img src={trash} alt='delete' onClick={(e) => props.handleRemoveFromCart(product)}/></td>
-					</tr>)}
+							<td>{product.name}</td>
+							<td><img src={minus} alt='minus' onClick={(e) => props.handleQtyMinus(product)}/>{product.qty}<img src={plus} alt='plus' onClick={(e) => props.handleQtyPlus(product)}/></td>
+							<td>{Math.round((product.price * product.qty) * 100) / 100}</td>
+							<td><img src={trash} alt='delete' onClick={(e) => props.handleRemoveFromCart(product)}/></td>
+						</tr>)}
+					</tbody>
 				</table>
 				<h4>Total: {Math.round(props.cartTotal * 100) / 100}</h4>
 				<CheckoutButton user={props.user} handleCheckout={props.handleCheckout}/>

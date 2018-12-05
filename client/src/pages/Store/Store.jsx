@@ -67,13 +67,18 @@ class Store extends Component {
 		var cartTotalCopy = this.state.cartTotal;
 		let item = Object.assign({}, e);
 		var foundItem = cartItemsCopy.findIndex(element => element.name === item.name);
-		if (foundItem !== 0) {
-			cartItemsCopy[foundItem].qty = cartItemsCopy[foundItem].qty - 1
+		if (foundItem >= 0) {
+			if (cartItemsCopy[foundItem].qty === 1) {
+				cartItemsCopy.splice(foundItem, 1);
+			} else {
+				cartItemsCopy[foundItem].qty -= 1
+			}
 		}
 		this.setState({
 			cartTotal: cartTotalCopy - e.price,
 			cartItems: cartItemsCopy
 		})
+
 	}
 
 	handleQtyPlus(e) {
@@ -81,11 +86,11 @@ class Store extends Component {
 		var cartTotalCopy = this.state.cartTotal;
 		let item = Object.assign({}, e);
 		var foundItem = cartItemsCopy.findIndex(element => element.name === item.name);
-		if (foundItem !== 0) {
-			cartItemsCopy[foundItem].qty = cartItemsCopy[foundItem].qty + 1
+		if (foundItem >= 0) {
+			cartItemsCopy[foundItem].qty += 1
 		}
 		this.setState({
-			cartTotal: cartTotalCopy - e.price,
+			cartTotal: cartTotalCopy + e.price,
 			cartItems: cartItemsCopy
 		})
 	}
