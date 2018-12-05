@@ -1,9 +1,3 @@
-Introduction to the app with one or more screenshots.
-List of the technologies used.
-Links to your Trello board and deployed app in a Getting Started section.
-Descriptions of any Unsolved Problems (if any).
-Descriptions of Future Enhancements.
-
 # Introduction
 BiZee Bird Store is an e-commerce site that sells birdseed. It was created for [The BiZee Bird Store](http://www.bizeebird.com) of Beaverton, Oregon.
 
