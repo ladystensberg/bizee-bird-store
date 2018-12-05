@@ -13,11 +13,19 @@ const ShoppingCart = (props) => {
 				<CheckoutButton user={props.user} handleCheckout={props.handleCheckout}/>
 			</div>
 		)
+	} else if (props.orderPlaced) {
+		return (
+			<div className="ShoppingCart MiddleContent">
+				<h1>Your Cart</h1>
+				<h4>Thank you for your order.</h4>
+				<p>Please visit your profile to view all orders placed.</p>
+			</div>
+		)
 	} else {
 		return (
 			<div className="ShoppingCart MiddleContent">
-			<h1>Your Cart</h1>
-			<h4>You have no items in your shopping cart.</h4>
+				<h1>Your Cart</h1>
+				<h4>You have no items in your shopping cart.</h4>
 			</div>
 		)
 	}

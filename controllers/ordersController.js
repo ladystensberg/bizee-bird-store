@@ -23,7 +23,7 @@ module.exports = {
 				user.orders.push(order);
 				user.save((err) => {
 					if (err) return next(err);
-					console.log(user.orders);
+					res.send(order);
 				})
 			});
 		});

@@ -10,10 +10,12 @@ class Store extends Component {
 		this.state = {
 			products: null,
 			cartItems: [],
-			cartTotal: 0
+			cartTotal: 0,
+			orderPlaced: false
 		}
 		this.handleAddToCart = this.handleAddToCart.bind(this);
 		this.handleCheckout = this.handleCheckout.bind(this);
+		this.resetStateAfterOrder = this.resetStateAfterOrder.bind(this);
 	}
 
 	componentDidMount() {
@@ -42,17 +44,26 @@ class Store extends Component {
 		})
 	}
 
+	resetStateAfterOrder() {
+		this.setState({
+			cartItems: [],
+			cartTotal: 0,
+			orderPlaced: true
+		})
+	}
+
 	handleCheckout() {
 		axios.post('/api/orders/checkout', {
 			lineItems: this.state.cartItems,
 			orderTotal: this.state.cartTotal,
 			user: this.props.user
 		})
-		.then(function (response) {
+		.then((response)  => {
 			console.log(response);
+			this.resetStateAfterOrder()
 		})
-		.catch(function (error) {
-			console.log(error);
+		.catch((error) => {
+			console.log(error)
 		});
 	}
 
@@ -60,7 +71,7 @@ class Store extends Component {
 		if (this.state.products) {
 			return (
 				<div className="MiddleContent Store">
-					<ShoppingCart user={this.props.user} handleCheckout={this.handleCheckout} cartItems={this.state.cartItems} cartTotal={this.state.cartTotal} />
+					<ShoppingCart orderPlaced={this.state.orderPlaced} user={this.props.user} handleCheckout={this.handleCheckout} cartItems={this.state.cartItems} cartTotal={this.state.cartTotal} />
 					<ProductList handleAddToCart={this.handleAddToCart} products={this.state.products} />
 				</div>
 			)
