@@ -24,10 +24,11 @@ BiZee Bird Store is an e-commerce site that sells birdseed. It was created for [
 * JWT
 * BCrypt
 * Axios
+* Dotenv
 
 # Getting Started
 [Trello Board](https://trello.com/b/HZoLwux7/bizee-bird-store) 
-[Deployed App Placeholder]
+[Deployed App](https://bizeebirdstore.heroku.com) 
 
 # Unsolved Problems
 The user password is being passed via the token on certain pages. This needs to be resolved as soon as possible to ensure the security of the user's private information.
