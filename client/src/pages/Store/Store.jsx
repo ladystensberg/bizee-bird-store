@@ -52,7 +52,6 @@ class Store extends Component {
 		var cartTotalCopy = this.state.cartTotal;
 		let item = Object.assign({}, e);
 		var foundItem = cartItemsCopy.findIndex(element => element.name === item.name);
-		console.log(foundItem);
 		if (foundItem >= 0) {
 			cartItemsCopy.splice(foundItem, 1);
 		}
@@ -110,7 +109,6 @@ class Store extends Component {
 			user: this.props.user
 		})
 		.then((response)  => {
-			console.log(response);
 			this.resetStateAfterOrder()
 		})
 		.catch((error) => {

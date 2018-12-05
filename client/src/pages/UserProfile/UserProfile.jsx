@@ -33,7 +33,6 @@ class UserProfile extends Component {
 			user: this.props.user
 		})
 		.then(result => {
-			console.log(result);
 			this.componentDidMount()
 		})
 	}
